@@ -9,6 +9,13 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem 'bootstrap-sass', '3.4.1'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem "faker"
+gem 'net-ssh'
+gem 'xmlrpc', '0.2.1'
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog', '~> 1.32.0'
+
 
 gem "will_paginate", "~> 3.1"
 gem "bootstrap-will_paginate", "1.0.0"
