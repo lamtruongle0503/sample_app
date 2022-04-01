@@ -17,6 +17,7 @@ gem 'mini_magick'
 gem 'fog', '~> 1.32.0'
 
 
+
 gem "will_paginate", "~> 3.1"
 gem "bootstrap-will_paginate", "1.0.0"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
