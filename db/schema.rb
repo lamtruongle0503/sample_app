@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_31_070458) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_01_021743) do
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "micropost_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_comments_on_micropost_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.integer "user_id", null: false
@@ -46,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_070458) do
     t.datetime "reset_send_at"
   end
 
+  add_foreign_key "comments", "microposts"
+  add_foreign_key "comments", "users"
   add_foreign_key "microposts", "users"
   add_foreign_key "microposts", "users"
 end
