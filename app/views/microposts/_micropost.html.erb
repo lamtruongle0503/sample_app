@@ -11,7 +11,7 @@ Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 <%= button_to "delete", micropost, method: :delete,
 data: { confirm: "You sure?" } %>
 <% end %>
-</span class="comment">
+<span class="comment">
 <% if micropost.comments.any? %>
     <ul class="comments">
       <%= render micropost.comments%>
@@ -19,7 +19,7 @@ data: { confirm: "You sure?" } %>
     <% end %>
 
     <%= render "shared/comment_form", micropost: micropost %>
-<span>
+</span>
 
 </span>
 </li>
