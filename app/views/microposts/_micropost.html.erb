@@ -12,4 +12,12 @@ Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 data: { confirm: "You sure?" } %>
 <% end %>
 </span>
+<span class="comment">
+<% if micropost.comments.any? %>
+    <ul class="comments">
+      <%= render micropost.comments%>
+    </ul>
+    <% end %>
+    <%= render "comments/comment", micropost: micropost %>
+</span>
 </li>
