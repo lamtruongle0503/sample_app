@@ -16,6 +16,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog', '~> 1.32.0'
 
+gem "closure_tree"
+
 
 gem "will_paginate", "~> 3.1"
 gem "bootstrap-will_paginate", "1.0.0"
