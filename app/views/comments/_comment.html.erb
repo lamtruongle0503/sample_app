@@ -1,6 +1,21 @@
 <li>
   <span class="content"><%= comment.content %></span>
+  <small> by <%= comment.user.email %></small>
   <span class="timestamp">
     Posted <%= time_ago_in_words(comment.created_at) %> ago.
   </span>
+<% from_reply_form ||= nil %>
+<% unless from_reply_form %>
+  <% if comment.leaf? %>
+    <small class="text-muted">There are no replies yet - be the first one to reply!</small>
+  <% end %>
+  <p><%= link_to 'reply', new_comment_path(comment.id) %></p>
+<% end %>
+      </div>
+  </div>
+  <% if comment.replies.any? %>
+    <% comment.replies.each do |reply| %> 
+      <%= render partial: 'comments/reply', locals: { reply: reply } %>
+    <% end %>
+  <% end %>
 </li>

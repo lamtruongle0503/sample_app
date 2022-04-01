@@ -1,6 +1,7 @@
 <%= form_for([micropost, Comment.new]) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
    <div>
+   <%= f.hidden_field :parent_id %>
      <%= f.text_area :content %>
    </div>
     <button type="submit">

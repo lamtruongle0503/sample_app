@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   resources :microposts, only: [:create, :destroy] do
     resources :comments
   end
-  
+  get '/comments/new/(:parent_id)', to: 'comments#new', as: :new_comment
   resources :relationships, only: [:create, :destroy]
 end
