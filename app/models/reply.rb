@@ -1,9 +1,11 @@
-class Comment < ApplicationRecord
+class Reply < ApplicationRecord
+
+  belongs_to :comment
   belongs_to :micropost
   belongs_to :user
-  has_many :replies
 
   validates :content, presence: true
+  validates :comment, presence: true
   validates :user, presence: true
   validates :micropost, presence: true
 end

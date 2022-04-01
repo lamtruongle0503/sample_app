@@ -1,6 +1,22 @@
 <li>
   <span class="content"><%= comment.content %></span>
   <span class="timestamp">
+    <p> <% comment.content%></p>
+    <small> by <%= comment.user.email %></small>
     Posted <%= time_ago_in_words(comment.created_at) %> ago.
+  </span>
+  <span class="reply">
+    <% if comment.replies.any? %>
+    <ul class="comments">
+      <%= render comment.replies%>
+    </ul>
+    <% end %>
+
+    <%
+=begin%>
+ <%= render "shared/reply_form", comment: comment %> 
+<%
+=end%>
+<span>
   </span>
 </li>
