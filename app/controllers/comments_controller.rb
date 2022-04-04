@@ -1,13 +1,21 @@
 class CommentsController < ApplicationController
 
+    def new 
+        @comment = Comment.new
+    end
+
     
 
     def create
+        # @commentable = find_commentable
+        # @comment = @commentable.comments.create(comment_params) 
+        # @comment.user = current_user
+        # @comment = @commentable.comments.build(comment_params)
         @micropost = Micropost.find(params[:micropost_id])
-        # @comment = Comment.new(params[:comment])
-        @comment = @micropost.comments.create(params.require(:comment).permit(:content)) 
+        @comment = @micropost.comments.create(comment_params) 
         @comment.micropost = @micropost
         @comment.user = current_user
+        
         
         if @comment.save
             flash[:success] = "Comment created!"
@@ -21,5 +29,10 @@ class CommentsController < ApplicationController
 
     def comment_params
         params.require(:comment).permit(:content)
+    end
+
+    def find_commentable
+        Comment.find(params[:comment_id]) if params[:comment_id]
+        Micropost.find(params[:micropost_id]) if params[:micropost_id]
     end
 end
