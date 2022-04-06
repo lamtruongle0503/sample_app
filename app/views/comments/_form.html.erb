@@ -1,0 +1,9 @@
+<%= form_with(model: [@micropost, @micropost.comments.build]) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group">
+        <%= f.hidden_field :micropost_id, :value => @micropost.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.text_area :body, placeholder: "Comment...", class: "form-control", required: true%>
+    </div>
+    <%= f.submit "Comment", class: "btn btn-primary" %>
+<% end %>

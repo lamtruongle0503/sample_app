@@ -1,14 +1,29 @@
-<li>
-  <span class="content"><%= comment.content %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(comment.created_at) %> ago.
-  </span>
-  <%= form_for [@commentable, Comment.new] do |f| %>
-        <%= f.text_area :content, placeholder: "Add a Reply" %><br/>
-        <%= f.submit "Reply"  %>
-        <% end %>
-
-    <ul>
-        <%= render comment.comments %>
-    </ul>
-</li>
+<% unless comment.parent_id || !comment.persisted? %>
+  <div id="comment-<%= comment.id %>" class="comment">
+    <%= link_to gravatar_for(comment.user, size: 40), comment.user %>
+    <span class="user"><%= link_to comment.user.name, comment.user %></span>
+    <div class="float-right">
+      <%= link_to 'Reply', new_micropost_comment_path(@micropost, parent_id: comment.id), remote: true, class: 'btn btn-primary btn-sm btn-reply' %>
+      
+      <% if current_user.id === comment.user_id %>
+        <%= link_to 'Edit', edit_comment_path(comment.id), remote: true, class: 'btn btn-info btn-sm btn-reply' %>
+      <% end %>
+      <% if @micropost.user_id === current_user.id || comment.user_id === current_user.id %>
+        <%= link_to 'Delete', comment, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm btn-reply' %>
+      <% end %>
+    </div>
+    <div class="timestamp">
+      <%= time_ago_in_words(comment.created_at) %> ago.
+    </div>
+    <div class="comment-body" id="holder-form-for-<%= comment.id %>">
+      <%= comment.body %>
+    </div>
+    
+    <div ></div>
+    <% if comment.replies.any? %>
+      <% comment.replies.each do |reply| %> 
+        <%= render partial: 'comments/reply', locals: { reply: reply } %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

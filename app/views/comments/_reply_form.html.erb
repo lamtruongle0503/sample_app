@@ -1,0 +1,12 @@
+<%= form_with(model: [@micropost, @comment]) do |f| %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.hidden_field :micropost_id, :value => @micropost.id %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="form-group">
+    <%= f.text_area :body, class: 'form-control', required: true, placeholder: 'Edit reply'%>
+  </div>
+  <div class="d-flex gap-x">
+    <%= f.submit 'Reply', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', micropost_path(@micropost), class: 'btn btn-light' %>
+  </div>
+<% end %>

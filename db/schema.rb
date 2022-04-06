@@ -10,16 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_04_033034) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_032342) do
   create_table "comments", force: :cascade do |t|
-    t.text "content"
+    t.text "body"
+    t.integer "parent_id"
     t.integer "user_id", null: false
     t.integer "micropost_id", null: false
-    t.string "commentable_type", null: false
-    t.integer "commentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["micropost_id"], name: "index_comments_on_micropost_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
